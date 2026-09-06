@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Javier Montero — Artista de Modelado 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14110d;
+    --bg-panel: #1c1712;
+    --bg-panel-2: #201a14;
+    --line: rgba(227,177,61,0.28);
+    --line-strong: rgba(227,177,61,0.55);
+    --accent: #e3b13d;
+    --accent-deep: #b8842c;
+    --accent-soft: #f0d66a;
+    --text: #f3ead9;
+    --text-muted: #a3947e;
+    --radius: 2px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  a{ color: inherit; text-decoration: none; }
+  img{ max-width:100%; display:block; }
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  ::selection{ background: var(--accent-deep); color: var(--text); }
+  :focus-visible{
+    outline: 2px solid var(--accent-soft);
+    outline-offset: 3px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position: sticky;
+    top:0;
+    z-index: 50;
+    background: rgba(20,17,13,0.86);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+  }
+  .logo span{ color: var(--accent); }
+  .nav-links{
+    display:flex;
+    gap: 36px;
+    list-style:none;
+    margin:0; padding:0;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+  .nav-links a{ transition: color .2s ease; }
+  .nav-links a:hover{ color: var(--accent-soft); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 96px 0 104px;
+  }
+  .hero .kicker{
+    color: var(--accent);
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+    line-height: 1.06;
+    max-width: 12ch;
+  }
+  .hero p.lede{
+    margin-top: 22px;
+    max-width: 44ch;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+  }
+  .hero .cta-row{
+    margin-top: 34px;
+    display:flex;
+    gap: 18px;
+    align-items:center;
+  }
+  .btn{
+    display:inline-block;
+    padding: 13px 26px;
+    background: var(--accent);
+    color: #1a1410;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--radius);
+    transition: background .2s ease, transform .2s ease;
+  }
+  .btn:hover{ background: var(--accent-soft); transform: translateY(-1px); }
+  .btn.ghost{
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line-strong);
+    padding: 12px 25px;
+  }
+  .btn.ghost:hover{ border-color: var(--accent); color: var(--accent-soft); }
+
+  /* ---------- SECTION HEADS ---------- */
+  section{ padding: 92px 0; }
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 22px;
+  }
+  .section-head h2{
+    font-size: 1.9rem;
+  }
+  .section-head .count{
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  /* ---------- SOBRE MÍ ---------- */
+  .about{ background: var(--bg-panel); }
+  .about-grid{ max-width: 70ch; }
+  .about p{ color: var(--text-muted); max-width: 60ch; margin: 0 0 16px; }
+  .about p:last-child{ margin-bottom:0; }
+  .about strong{ color: var(--text); font-weight: 600; }
+
+  .stat-row{
+    display:flex;
+    gap: 40px;
+    margin-top: 34px;
+    flex-wrap: wrap;
+  }
+  .stat b{
+    display:block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.7rem;
+    color: var(--accent-soft);
+  }
+  .stat span{
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* ---------- PROYECTOS ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+  }
+  .card{
+    border: 1px solid var(--line);
+    background: var(--bg-panel-2);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    transition: border-color .2s ease;
+    cursor: pointer;
+  }
+  .card:hover{ border-color: var(--line-strong); }
+
+  .play-btn{
+    position:absolute;
+    top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    z-index:3;
+    width:52px; height:52px;
+    border-radius:50%;
+    background: rgba(20,17,13,0.55);
+    border:1px solid var(--accent-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .play-btn::after{
+    content:"";
+    width:0; height:0;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 14px solid var(--accent-soft);
+    margin-left: 4px;
+  }
+  .card:hover .play-btn{
+    background: rgba(20,17,13,0.78);
+    transform: translate(-50%,-50%) scale(1.08);
+  }
+  .soon{
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    border: 1px solid var(--line-strong);
+    padding: 6px 12px;
+  }
+  div.card{ cursor: default; }
+  .card:nth-child(1){ grid-column: span 4; }
+  .card:nth-child(2){ grid-column: span 2; }
+  .card:nth-child(3){ grid-column: span 2; }
+  .card:nth-child(4){ grid-column: span 4; }
+
+  .thumb{
+    aspect-ratio: 16/10;
+    position: relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .thumb .shape{
+    width: 46%; height: 46%;
+    border: 1.5px solid var(--accent-soft);
+    position: relative;
+    z-index:2;
+  }
+  .thumb .shape.plan{
+    width: 58%; height: 40%;
+    position: relative;
+  }
+  .thumb .shape.plan::before{
+    content:"";
+    position:absolute;
+    top: 0; bottom:0; left: 38%;
+    width: 1px;
+    background: var(--accent-soft);
+    opacity: 0.7;
+  }
+  .thumb .shape.tower{
+    width: 30%; height: 62%;
+    position: relative;
+  }
+  .thumb .shape.tower::before{
+    content:"";
+    position:absolute;
+    left:0; right:0; top: 22%;
+    height: 1px;
+    background: var(--accent-soft);
+    opacity: 0.7;
+    box-shadow: 0 34% 0 var(--accent-soft);
+  }
+  .t1 .thumb{ background: linear-gradient(155deg, #2a2015, #17130e); }
+  .t2 .thumb{ background: linear-gradient(155deg, #26200e, #17130e); }
+  .t3 .thumb{ background: linear-gradient(155deg, #2b1b12, #17130e); }
+  .t4 .thumb{ background: linear-gradient(155deg, #241a12, #17130e); }
+  .t5 .thumb{ background: linear-gradient(155deg, #2c1a10, #17130e); }
+  .t6 .thumb{ background: linear-gradient(155deg, #271f13, #17130e); }
+
+  .card-body{
+    padding: 18px 20px 20px;
+  }
+  .card-body h3{
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+  .meta{
+    display:flex;
+    gap: 10px;
+    align-items:center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+  .meta .div{
+    width:1px; height: 10px;
+    background: var(--line-strong);
+  }
+
+  /* ---------- HABILIDADES ---------- */
+  .skills{ background: var(--bg-panel); }
+  .skill-cols{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 44px 60px;
+  }
+  .skill-group h3{
+    font-size: 1rem;
+    color: var(--accent-soft);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .tags{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .tag{
+    padding: 8px 14px;
+    border: 1px solid var(--line-strong);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  /* ---------- PROCESO ---------- */
+  .process{ background: var(--bg-panel); }
+  .process-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .process-step{
+    display:grid;
+    grid-template-columns: 64px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+  }
+  .process-list .process-step:last-child{ border-bottom: 1px solid var(--line); }
+  .process-step .num{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    color: var(--accent);
+  }
+  .process-step h3{
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  .process-step p{
+    color: var(--text-muted);
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  /* ---------- CONTACTO ---------- */
+  .contact{
+    text-align: left;
+  }
+  .contact h2.big{
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    max-width: 16ch;
+    line-height: 1.12;
+  }
+  .contact-row{
+    margin-top: 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+  }
+  .contact-links{
+    display:flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .contact-links a{
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    border-bottom: 1px solid transparent;
+  }
+  .contact-links a:hover{
+    color: var(--accent-soft);
+    border-bottom-color: var(--accent-soft);
+  }
+
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 26px 0;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    display:flex;
+    justify-content: space-between;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .hero{ padding-top: 56px; }
+    .project-grid{ grid-template-columns: repeat(2,1fr); }
+    .card:nth-child(n){ grid-column: span 2; }
+    .skill-cols{ grid-template-columns: 1fr; }
+    nav{ padding: 16px 20px; }
+    .nav-links{ gap: 18px; font-size: 0.82rem; }
+    .wrap{ padding: 0 20px; }
+    footer{ flex-direction: column; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav>
+    <div class="logo">javier<span>.</span>montero</div>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero wrap">
+    <div>
+      <div class="kicker">Modelado 3D · Diseño de escena</div>
+      <h1>Javier Montero</h1>
+      <p class="lede">Diseño y modelo escenas en Blender — desde dioramas y escenografías hasta esculturas de personajes — cuidando la composición, los materiales y la luz en cada pieza.</p>
+      <div class="cta-row">
+        <a class="btn" href="#proyectos">Ver proyectos</a>
+        <a class="btn ghost" href="#contacto">Escríbeme</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="sobre-mi">
+    <div class="wrap about-grid">
+      <div>
+        <h2 style="font-size:1.9rem; margin-bottom:22px;">Sobre mí</h2>
+        <p>Estoy terminando mi carrera y me especializo en construir escenas y objetos en <strong>Blender</strong>, desde dioramas hasta recreaciones de videojuegos y esculturas de personajes.</p>
+        <p>Me interesa sobre todo el proceso de llevar una idea simple a una escena que se sienta completa: la composición, el detalle escultórico y cómo la luz cambia por completo el resultado final. Disfruto moverme entre estilos distintos — de lo más estilizado a recreaciones más realistas — y uso cada proyecto personal para profundizar en una parte distinta del proceso.</p>
+        <div class="stat-row">
+          <div class="stat"><b>4</b><span>proyectos en el portafolio</span></div>
+          <div class="stat"><b>Blender</b><span>herramienta principal</span></div>
+          <div class="stat"><b>Último año</b><span>de la carrera</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Proyectos</h2>
+        <span class="count">Selección de 4 trabajos</span>
+      </div>
+      <div class="project-grid">
+
+        <a class="card t1" href="https://www.youtube.com/watch?v=uK47A8qgbuA" target="_blank" rel="noopener noreferrer" aria-label="Ver video de Diorama Habitación en YouTube">
+          <div class="thumb" style="background-image:url('https://img.youtube.com/vi/uK47A8qgbuA/hqdefault.jpg'); background-size:cover; background-position:center;">
+            <div class="play-btn"></div>
+          </div>
+          <div class="card-body">
+            <h3>Diorama Habitación</h3>
+            <div class="meta"><span>Blender</span><span class="div"></span><span>Diorama</span></div>
+          </div>
+        </a>
+
+        <div class="card t2" aria-label="Escenario 3D con inspiración japonesa — video próximamente">
+          <div class="thumb">
+            <span class="soon">Video próximamente</span>
+          </div>
+          <div class="card-body">
+            <h3>Escenario 3D con inspiración japonesa</h3>
+            <div class="meta"><span>Blender</span><span class="div"></span><span>Escenografía</span></div>
+          </div>
+        </div>
+
+        <a class="card t3" href="https://youtu.be/kPb4OWRaOyQ" target="_blank" rel="noopener noreferrer" aria-label="Ver video de Escena Left 4 Dead 2 en YouTube">
+          <div class="thumb" style="background-image:url('https://img.youtube.com/vi/kPb4OWRaOyQ/hqdefault.jpg'); background-size:cover; background-position:center;">
+            <div class="play-btn"></div>
+          </div>
+          <div class="card-body">
+            <h3>Escena Left 4 Dead 2</h3>
+            <div class="meta"><span>Blender</span><span class="div"></span><span>Recreación de videojuego</span></div>
+          </div>
+        </a>
+
+        <a class="card t4" href="https://youtu.be/XqcSdGm-0g8" target="_blank" rel="noopener noreferrer" aria-label="Ver video de Estatua Gato en YouTube">
+          <div class="thumb" style="background-image:url('https://img.youtube.com/vi/XqcSdGm-0g8/hqdefault.jpg'); background-size:cover; background-position:center;">
+            <div class="play-btn"></div>
+          </div>
+          <div class="card-body">
+            <h3>Estatua Gato</h3>
+            <div class="meta"><span>Blender</span><span class="div"></span><span>Escultura digital</span></div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="skills" id="habilidades">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Habilidades</h2>
+      </div>
+      <div class="skill-cols">
+        <div class="skill-group">
+          <h3>Modelado y diseño de escena</h3>
+          <div class="tags">
+            <span class="tag">Blender</span>
+            <span class="tag">Modelado poligonal</span>
+            <span class="tag">Escultura digital</span>
+            <span class="tag">Composición de escena</span>
+            <span class="tag">Encuadre y cámaras</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Render e iluminación</h3>
+          <div class="tags">
+            <span class="tag">Cycles</span>
+            <span class="tag">Eevee</span>
+            <span class="tag">Iluminación de estudio</span>
+            <span class="tag">HDRI</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Materiales y texturizado</h3>
+          <div class="tags">
+            <span class="tag">Shader nodes</span>
+            <span class="tag">UV mapping</span>
+            <span class="tag">Texturizado procedural</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Otros</h3>
+          <div class="tags">
+            <span class="tag">Retopología</span>
+            <span class="tag">Optimización de assets</span>
+            <span class="tag">Animación básica</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="process" id="proceso">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Proceso</h2>
+      </div>
+      <div class="process-list">
+        <div class="process-step">
+          <span class="num">01</span>
+          <div>
+            <h3>Referencia y planificación</h3>
+            <p>Reúno referencias visuales y defino la idea de la escena: qué historia cuenta, qué encuadre va a tener y qué atmósfera busco antes de abrir Blender.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <span class="num">02</span>
+          <div>
+            <h3>Bloqueo de volúmenes</h3>
+            <p>Armo la escena con formas simples: proporciones, distribución del espacio y composición de cámara, sin entrar todavía en el detalle.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <span class="num">03</span>
+          <div>
+            <h3>Detalle y escultura</h3>
+            <p>Agrego el detalle de cada objeto — con modificadores o escultura digital según el caso — y aplico los materiales que le dan carácter a la pieza.</p>
+          </div>
+        </div>
+        <div class="process-step">
+          <span class="num">04</span>
+          <div>
+            <h3>Iluminación y render final</h3>
+            <p>Ajusto la iluminación de la escena, pruebo distintos encuadres y renderizo la imagen o el video final en Cycles o Eevee.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact wrap" id="contacto">
+    <h2 class="big">¿Buscas a alguien para tu próximo proyecto en 3D? Hablemos.</h2>
+    <div class="contact-row">
+      <div class="contact-links">
+        <a href="mailto:hola@javiermontero.com">hola@javiermontero.com</a>
+        <a href="#">ArtStation</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+      </div>
+      <a class="btn" href="mailto:hola@javiermontero.com">Enviar un mensaje</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>Javier Montero — Modelado y render 3D</span>
+  <span>Santiago, Chile</span>
+</footer>
+
+</body>
+</html>
