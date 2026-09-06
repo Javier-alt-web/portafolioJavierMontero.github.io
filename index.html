@@ -319,35 +319,6 @@
     font-size: 0.85rem;
   }
 
-  /* ---------- PROCESO ---------- */
-  .process{ background: var(--bg-panel); }
-  .process-list{
-    display:flex;
-    flex-direction:column;
-  }
-  .process-step{
-    display:grid;
-    grid-template-columns: 64px 1fr;
-    gap: 24px;
-    padding: 28px 0;
-    border-top: 1px solid var(--line);
-  }
-  .process-list .process-step:last-child{ border-bottom: 1px solid var(--line); }
-  .process-step .num{
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.4rem;
-    color: var(--accent);
-  }
-  .process-step h3{
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-  }
-  .process-step p{
-    color: var(--text-muted);
-    max-width: 60ch;
-    margin: 0;
-  }
-
   /* ---------- CONTACTO ---------- */
   .contact{
     text-align: left;
@@ -413,7 +384,6 @@
       <li><a href="#sobre-mi">Sobre mí</a></li>
       <li><a href="#proyectos">Proyectos</a></li>
       <li><a href="#habilidades">Habilidades</a></li>
-      <li><a href="#proceso">Proceso</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
   </nav>
@@ -550,44 +520,6 @@
             <span class="tag">Retopología</span>
             <span class="tag">Optimización de assets</span>
             <span class="tag">Animación básica</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="process" id="proceso">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Proceso</h2>
-      </div>
-      <div class="process-list">
-        <div class="process-step">
-          <span class="num">01</span>
-          <div>
-            <h3>Referencia y planificación</h3>
-            <p>Reúno referencias visuales y defino la idea de la escena: qué historia cuenta, qué encuadre va a tener y qué atmósfera busco antes de abrir Blender.</p>
-          </div>
-        </div>
-        <div class="process-step">
-          <span class="num">02</span>
-          <div>
-            <h3>Bloqueo de volúmenes</h3>
-            <p>Armo la escena con formas simples: proporciones, distribución del espacio y composición de cámara, sin entrar todavía en el detalle.</p>
-          </div>
-        </div>
-        <div class="process-step">
-          <span class="num">03</span>
-          <div>
-            <h3>Detalle y escultura</h3>
-            <p>Agrego el detalle de cada objeto — con modificadores o escultura digital según el caso — y aplico los materiales que le dan carácter a la pieza.</p>
-          </div>
-        </div>
-        <div class="process-step">
-          <span class="num">04</span>
-          <div>
-            <h3>Iluminación y render final</h3>
-            <p>Ajusto la iluminación de la escena, pruebo distintos encuadres y renderizo la imagen o el video final en Cycles o Eevee.</p>
           </div>
         </div>
       </div>
