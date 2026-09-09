@@ -390,6 +390,12 @@
     justify-content:center;
     position: relative;
   }
+  .modal-video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+  }
   .modal-nav{
     position:absolute;
     top:50%;
@@ -524,7 +530,7 @@
       <div class="project-grid">
 
         <button type="button" class="card t1" onclick="openModal(0)" aria-label="Ver detalle del proyecto Diorama Habitación">
-          <div class="thumb" style="background-image:url('https://img.youtube.com/vi/uK47A8qgbuA/hqdefault.jpg'); background-size:cover; background-position:center;">
+          <div class="thumb" style="background-image:url('images/Diorama_Habitacion/Diorama_Habitacion_Render.png'); background-size:cover; background-position:center;">
             <div class="view-btn">Ver proyecto</div>
           </div>
           <div class="card-body">
@@ -544,7 +550,7 @@
         </button>
 
         <button type="button" class="card t3" onclick="openModal(2)" aria-label="Ver detalle del proyecto Escena Left 4 Dead 2">
-          <div class="thumb" style="background-image:url('https://img.youtube.com/vi/kPb4OWRaOyQ/hqdefault.jpg'); background-size:cover; background-position:center;">
+          <div class="thumb" style="background-image:url('images/Escenario_Left/Demostracion_Lods.png'); background-size:cover; background-position:center;">
             <div class="view-btn">Ver proyecto</div>
           </div>
           <div class="card-body">
@@ -554,7 +560,7 @@
         </button>
 
         <button type="button" class="card t4" onclick="openModal(3)" aria-label="Ver detalle del proyecto Estatua Gato">
-          <div class="thumb" style="background-image:url('https://img.youtube.com/vi/XqcSdGm-0g8/hqdefault.jpg'); background-size:cover; background-position:center;">
+          <div class="thumb" style="background-image:url('images/Gato/Gato_Render.png'); background-size:cover; background-position:center;">
             <div class="view-btn">Ver proyecto</div>
           </div>
           <div class="card-body">
@@ -564,8 +570,8 @@
         </button>
 
         <button type="button" class="card t5" onclick="openModal(4)" aria-label="Ver detalle del proyecto Escena zombie">
-          <div class="thumb" style="background-image:url('https://img.youtube.com/vi/ylT5yHrQJKw/hqdefault.jpg'); background-size:cover; background-position:center;">
-            <div class="view-btn">Ver proyecto</div>
+          <div class="thumb">
+            <span class="soon">Imágenes próximamente</span>
           </div>
           <div class="card-body">
             <h3>Escena zombie</h3>
@@ -645,6 +651,7 @@
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <button type="button" class="modal-close" onclick="closeModal()" aria-label="Cerrar">&times;</button>
     <div class="modal-image" id="modalImage">
+      <video id="modalVideo" class="modal-video" controls playsinline></video>
       <button type="button" class="modal-nav prev" id="modalPrev" onclick="prevImage()" aria-label="Imagen anterior">&#8249;</button>
       <button type="button" class="modal-nav next" id="modalNext" onclick="nextImage()" aria-label="Imagen siguiente">&#8250;</button>
       <span class="modal-counter" id="modalCounter"></span>
@@ -684,8 +691,12 @@
       title: "Escena Left 4 Dead 2",
       tags: ["Blender", "Recreación de videojuego", "Fotogrametría"],
       images: [
-        "https://img.youtube.com/vi/kPb4OWRaOyQ/hqdefault.jpg"
-        // agrega aquí más rutas
+        "images/Escenario_Left/Demostracion_Lods.png",
+        "images/Escenario_Left/Demostracion_Occlusion_Culling.png",
+        "images/Escenario_Left/Referencia_Left_1.png",
+        "images/Escenario_Left/Referencia_Left_2.png",
+        "images/Escenario_Left/Referencia_left_3.png",
+        "images/Escenario_Left/Demostracion_Bake_Iluminacion.mp4"
       ],
       description: "Recreación de una escena del videojuego Left 4 Dead 2, modelada en Blender y apoyada en fotogrametría para lograr mayor fidelidad en los materiales y el detalle del entorno.",
       youtube: "https://youtu.be/kPb4OWRaOyQ"
@@ -694,8 +705,8 @@
       title: "Estatua Gato",
       tags: ["Blender", "Escultura digital"],
       images: [
-        "https://img.youtube.com/vi/XqcSdGm-0g8/hqdefault.jpg"
-        // agrega aquí más rutas
+        "images/Gato/Gato_Render.png",
+        "images/Gato/Gato_Wireframe.png"
       ],
       description: "Escultura digital de un gato modelada a mano en Blender, con foco en el trabajo de forma orgánica y el acabado final del material.",
       youtube: "https://youtu.be/XqcSdGm-0g8"
@@ -704,8 +715,7 @@
       title: "Escena zombie",
       tags: ["Unreal Engine", "Cinemática"],
       images: [
-        "https://img.youtube.com/vi/ylT5yHrQJKw/hqdefault.jpg"
-        // agrega aquí más rutas
+        // agrega aquí tus rutas cuando tengas imágenes de este proyecto
       ],
       description: "Escena cinemática ambientada en un contexto zombie, trabajada en Unreal Engine con distintos encuadres de cámara para narrar el momento.",
       youtube: "https://youtu.be/ylT5yHrQJKw"
@@ -714,6 +724,7 @@
 
   const overlay = document.getElementById('modalOverlay');
   const modalImage = document.getElementById('modalImage');
+  const modalVideo = document.getElementById('modalVideo');
   const modalPrev = document.getElementById('modalPrev');
   const modalNext = document.getElementById('modalNext');
   const modalCounter = document.getElementById('modalCounter');
@@ -726,10 +737,17 @@
   let currentProject = null;
   let currentImageIndex = 0;
 
+  function isVideoPath(path){
+    return /\.(mp4|webm|mov|ogg)$/i.test(path);
+  }
+
   function renderImage(){
     const images = currentProject.images || [];
+    modalVideo.pause();
+
     if(images.length === 0){
       modalImage.style.backgroundImage = 'none';
+      modalVideo.style.display = 'none';
       modalNoImage.style.display = 'block';
       modalPrev.classList.add('hidden');
       modalNext.classList.add('hidden');
@@ -737,7 +755,17 @@
       return;
     }
     modalNoImage.style.display = 'none';
-    modalImage.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+    const current = images[currentImageIndex];
+
+    if(isVideoPath(current)){
+      modalImage.style.backgroundImage = 'none';
+      modalVideo.src = current;
+      modalVideo.style.display = 'block';
+    } else {
+      modalVideo.style.display = 'none';
+      modalVideo.removeAttribute('src');
+      modalImage.style.backgroundImage = `url('${current}')`;
+    }
 
     if(images.length > 1){
       modalPrev.classList.remove('hidden');
