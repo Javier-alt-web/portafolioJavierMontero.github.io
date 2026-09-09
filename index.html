@@ -181,6 +181,13 @@
     gap: 20px;
   }
   .card{
+    appearance: none;
+    -webkit-appearance: none;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+    padding: 0;
+    margin: 0;
     border: 1px solid var(--line);
     background: var(--bg-panel-2);
     display:flex;
@@ -189,33 +196,24 @@
     transition: border-color .2s ease;
     cursor: pointer;
   }
-  .card:hover{ border-color: var(--line-strong); }
+  .card:hover, .card:focus-visible{ border-color: var(--line-strong); }
 
-  .play-btn{
+  .view-btn{
     position:absolute;
     top:50%; left:50%;
     transform: translate(-50%,-50%);
     z-index:3;
-    width:52px; height:52px;
-    border-radius:50%;
-    background: rgba(20,17,13,0.55);
-    border:1px solid var(--accent-soft);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition: background .2s ease, transform .2s ease;
+    padding: 10px 20px;
+    border: 1px solid var(--accent-soft);
+    background: rgba(20,17,13,0.62);
+    color: var(--text);
+    font-size: 0.85rem;
+    letter-spacing: 0.01em;
+    transition: background .2s ease, border-color .2s ease;
   }
-  .play-btn::after{
-    content:"";
-    width:0; height:0;
-    border-top: 9px solid transparent;
-    border-bottom: 9px solid transparent;
-    border-left: 14px solid var(--accent-soft);
-    margin-left: 4px;
-  }
-  .card:hover .play-btn{
-    background: rgba(20,17,13,0.78);
-    transform: translate(-50%,-50%) scale(1.08);
+  .card:hover .view-btn{
+    background: rgba(20,17,13,0.82);
+    border-color: var(--accent);
   }
   .soon{
     color: var(--text-muted);
@@ -223,7 +221,6 @@
     border: 1px solid var(--line-strong);
     padding: 6px 12px;
   }
-  div.card{ cursor: default; }
   .card:nth-child(1){ grid-column: span 4; }
   .card:nth-child(2){ grid-column: span 2; }
   .card:nth-child(3){ grid-column: span 2; }
@@ -362,6 +359,106 @@
     justify-content: space-between;
   }
 
+  /* ---------- MODAL DE PROYECTO ---------- */
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background: rgba(10,8,6,0.86);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:200;
+    padding: 24px;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-panel{
+    background: var(--bg-panel-2);
+    border: 1px solid var(--line-strong);
+    max-width: 720px;
+    width:100%;
+    max-height: 88vh;
+    overflow-y:auto;
+    position:relative;
+  }
+  .modal-image{
+    aspect-ratio: 16/9;
+    background-color:#201a14;
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position: relative;
+  }
+  .modal-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:38px; height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: rgba(20,17,13,0.55);
+    border:1px solid var(--line-strong);
+    color: var(--text);
+    font-size:1.3rem;
+    line-height:1;
+    cursor:pointer;
+    transition: background .2s ease, border-color .2s ease;
+    z-index:3;
+  }
+  .modal-nav:hover{ background: rgba(20,17,13,0.82); border-color: var(--accent-soft); color: var(--accent-soft); }
+  .modal-nav.prev{ left:14px; }
+  .modal-nav.next{ right:14px; }
+  .modal-nav.hidden{ display:none; }
+  .modal-counter{
+    position:absolute;
+    bottom:12px; left:14px;
+    background: rgba(20,17,13,0.6);
+    border:1px solid var(--line-strong);
+    color: var(--text-muted);
+    font-size:0.75rem;
+    padding:4px 10px;
+    z-index:3;
+  }
+  .modal-counter.hidden{ display:none; }
+  .modal-close{
+    position:absolute;
+    top:14px; right:14px;
+    width:36px; height:36px;
+    border:1px solid var(--line-strong);
+    background: rgba(20,17,13,0.7);
+    color: var(--text);
+    font-size:1.1rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2;
+  }
+  .modal-close:hover{ border-color: var(--accent-soft); color: var(--accent-soft); }
+  .modal-body{ padding: 30px 32px 34px; }
+  .modal-body h3{ font-size: 1.5rem; margin-bottom: 14px; }
+  .modal-body .tags{ margin-bottom: 20px; }
+  .modal-body p.desc{
+    color: var(--text-muted);
+    margin: 0 0 26px;
+    max-width: 60ch;
+  }
+  .modal-video-link{
+    display:inline-flex;
+    align-items:center;
+    gap: 10px;
+    padding: 12px 22px;
+    border: 1px solid var(--line-strong);
+    color: var(--text);
+    font-size: 0.9rem;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .modal-video-link:hover{ border-color: var(--accent-soft); color: var(--accent-soft); }
+  .modal-video-link svg{ width:16px; height:16px; fill:currentColor; flex-shrink:0; }
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 860px){
     .hero{ padding-top: 56px; }
@@ -426,17 +523,17 @@
       </div>
       <div class="project-grid">
 
-        <a class="card t1" href="https://www.youtube.com/watch?v=uK47A8qgbuA" target="_blank" rel="noopener noreferrer" aria-label="Ver video de Diorama Habitación en YouTube">
+        <button type="button" class="card t1" onclick="openModal(0)" aria-label="Ver detalle del proyecto Diorama Habitación">
           <div class="thumb" style="background-image:url('https://img.youtube.com/vi/uK47A8qgbuA/hqdefault.jpg'); background-size:cover; background-position:center;">
-            <div class="play-btn"></div>
+            <div class="view-btn">Ver proyecto</div>
           </div>
           <div class="card-body">
             <h3>Diorama Habitación</h3>
             <div class="meta"><span>Blender</span><span class="div"></span><span>Diorama</span></div>
           </div>
-        </a>
+        </button>
 
-        <div class="card t2" aria-label="Escenario 3D con inspiración japonesa — video próximamente">
+        <button type="button" class="card t2" onclick="openModal(1)" aria-label="Ver detalle del proyecto Escenario 3D con inspiración japonesa">
           <div class="thumb">
             <span class="soon">Video próximamente</span>
           </div>
@@ -444,37 +541,37 @@
             <h3>Escenario 3D con inspiración japonesa</h3>
             <div class="meta"><span>Unity</span><span class="div"></span><span>Escenografía</span></div>
           </div>
-        </div>
+        </button>
 
-        <a class="card t3" href="https://youtu.be/kPb4OWRaOyQ" target="_blank" rel="noopener noreferrer" aria-label="Ver video de Escena Left 4 Dead 2 en YouTube">
+        <button type="button" class="card t3" onclick="openModal(2)" aria-label="Ver detalle del proyecto Escena Left 4 Dead 2">
           <div class="thumb" style="background-image:url('https://img.youtube.com/vi/kPb4OWRaOyQ/hqdefault.jpg'); background-size:cover; background-position:center;">
-            <div class="play-btn"></div>
+            <div class="view-btn">Ver proyecto</div>
           </div>
           <div class="card-body">
             <h3>Escena Left 4 Dead 2</h3>
             <div class="meta"><span>Blender</span><span class="div"></span><span>Recreación de videojuego</span><span class="div"></span><span>Fotogrametría</span></div>
           </div>
-        </a>
+        </button>
 
-        <a class="card t4" href="https://youtu.be/XqcSdGm-0g8" target="_blank" rel="noopener noreferrer" aria-label="Ver video de Estatua Gato en YouTube">
+        <button type="button" class="card t4" onclick="openModal(3)" aria-label="Ver detalle del proyecto Estatua Gato">
           <div class="thumb" style="background-image:url('https://img.youtube.com/vi/XqcSdGm-0g8/hqdefault.jpg'); background-size:cover; background-position:center;">
-            <div class="play-btn"></div>
+            <div class="view-btn">Ver proyecto</div>
           </div>
           <div class="card-body">
             <h3>Estatua Gato</h3>
             <div class="meta"><span>Blender</span><span class="div"></span><span>Escultura digital</span></div>
           </div>
-        </a>
+        </button>
 
-        <a class="card t5" href="https://youtu.be/ylT5yHrQJKw" target="_blank" rel="noopener noreferrer" aria-label="Ver video de Escena zombie en YouTube">
+        <button type="button" class="card t5" onclick="openModal(4)" aria-label="Ver detalle del proyecto Escena zombie">
           <div class="thumb" style="background-image:url('https://img.youtube.com/vi/ylT5yHrQJKw/hqdefault.jpg'); background-size:cover; background-position:center;">
-            <div class="play-btn"></div>
+            <div class="view-btn">Ver proyecto</div>
           </div>
           <div class="card-body">
             <h3>Escena zombie</h3>
             <div class="meta"><span>Unreal Engine</span><span class="div"></span><span>Cinemática</span></div>
           </div>
-        </a>
+        </button>
 
       </div>
     </div>
@@ -543,6 +640,183 @@
   <span>Javier Montero — Modelado y render 3D</span>
   <span>Santiago, Chile</span>
 </footer>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close" onclick="closeModal()" aria-label="Cerrar">&times;</button>
+    <div class="modal-image" id="modalImage">
+      <button type="button" class="modal-nav prev" id="modalPrev" onclick="prevImage()" aria-label="Imagen anterior">&#8249;</button>
+      <button type="button" class="modal-nav next" id="modalNext" onclick="nextImage()" aria-label="Imagen siguiente">&#8250;</button>
+      <span class="modal-counter" id="modalCounter"></span>
+      <span class="soon" id="modalNoImage" style="display:none;">Imágenes próximamente</span>
+    </div>
+    <div class="modal-body">
+      <h3 id="modalTitle"></h3>
+      <div class="meta tags" id="modalMeta"></div>
+      <p class="desc" id="modalDesc"></p>
+      <div id="modalAction"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const projects = [
+    {
+      title: "Diorama Habitación",
+      tags: ["Blender", "Diorama"],
+      images: [
+        "https://img.youtube.com/vi/uK47A8qgbuA/hqdefault.jpg",
+        "images/Diorama_Habitacion/Diorama_Habitacion_Render.png",
+        "images/Diorama_Habitacion/Diorama_habitación_Wireframe.png"
+      ],
+      description: "Diorama de una habitación modelado a mano en Blender, cuidando la composición del espacio, el mobiliario y la iluminación para darle una atmósfera acogedora a la escena.",
+      youtube: "https://www.youtube.com/watch?v=uK47A8qgbuA"
+    },
+    {
+      title: "Escenario 3D con inspiración japonesa",
+      tags: ["Unity", "Escenografía"],
+      images: [
+        // agrega aquí tus rutas, ej: "images/japones-1.jpg"
+      ],
+      description: "Escenografía 3D inspirada en la estética japonesa, pensada para integrarse en Unity. El video del proceso todavía está en camino.",
+      youtube: null
+    },
+    {
+      title: "Escena Left 4 Dead 2",
+      tags: ["Blender", "Recreación de videojuego", "Fotogrametría"],
+      images: [
+        "https://img.youtube.com/vi/kPb4OWRaOyQ/hqdefault.jpg"
+        // agrega aquí más rutas
+      ],
+      description: "Recreación de una escena del videojuego Left 4 Dead 2, modelada en Blender y apoyada en fotogrametría para lograr mayor fidelidad en los materiales y el detalle del entorno.",
+      youtube: "https://youtu.be/kPb4OWRaOyQ"
+    },
+    {
+      title: "Estatua Gato",
+      tags: ["Blender", "Escultura digital"],
+      images: [
+        "https://img.youtube.com/vi/XqcSdGm-0g8/hqdefault.jpg"
+        // agrega aquí más rutas
+      ],
+      description: "Escultura digital de un gato modelada a mano en Blender, con foco en el trabajo de forma orgánica y el acabado final del material.",
+      youtube: "https://youtu.be/XqcSdGm-0g8"
+    },
+    {
+      title: "Escena zombie",
+      tags: ["Unreal Engine", "Cinemática"],
+      images: [
+        "https://img.youtube.com/vi/ylT5yHrQJKw/hqdefault.jpg"
+        // agrega aquí más rutas
+      ],
+      description: "Escena cinemática ambientada en un contexto zombie, trabajada en Unreal Engine con distintos encuadres de cámara para narrar el momento.",
+      youtube: "https://youtu.be/ylT5yHrQJKw"
+    }
+  ];
+
+  const overlay = document.getElementById('modalOverlay');
+  const modalImage = document.getElementById('modalImage');
+  const modalPrev = document.getElementById('modalPrev');
+  const modalNext = document.getElementById('modalNext');
+  const modalCounter = document.getElementById('modalCounter');
+  const modalNoImage = document.getElementById('modalNoImage');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalMeta = document.getElementById('modalMeta');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalAction = document.getElementById('modalAction');
+
+  let currentProject = null;
+  let currentImageIndex = 0;
+
+  function renderImage(){
+    const images = currentProject.images || [];
+    if(images.length === 0){
+      modalImage.style.backgroundImage = 'none';
+      modalNoImage.style.display = 'block';
+      modalPrev.classList.add('hidden');
+      modalNext.classList.add('hidden');
+      modalCounter.classList.add('hidden');
+      return;
+    }
+    modalNoImage.style.display = 'none';
+    modalImage.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+
+    if(images.length > 1){
+      modalPrev.classList.remove('hidden');
+      modalNext.classList.remove('hidden');
+      modalCounter.classList.remove('hidden');
+      modalCounter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+    } else {
+      modalPrev.classList.add('hidden');
+      modalNext.classList.add('hidden');
+      modalCounter.classList.add('hidden');
+    }
+  }
+
+  function prevImage(){
+    const images = currentProject.images || [];
+    if(images.length < 2) return;
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    renderImage();
+  }
+
+  function nextImage(){
+    const images = currentProject.images || [];
+    if(images.length < 2) return;
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    renderImage();
+  }
+
+  function openModal(index){
+    const p = projects[index];
+    if(!p) return;
+    currentProject = p;
+    currentImageIndex = 0;
+    renderImage();
+
+    modalTitle.textContent = p.title;
+    modalDesc.textContent = p.description;
+
+    modalMeta.innerHTML = '';
+    p.tags.forEach(t => {
+      const span = document.createElement('span');
+      span.className = 'tag';
+      span.textContent = t;
+      modalMeta.appendChild(span);
+    });
+
+    modalAction.innerHTML = '';
+    if(p.youtube){
+      const link = document.createElement('a');
+      link.href = p.youtube;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.className = 'modal-video-link';
+      link.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ver en YouTube';
+      modalAction.appendChild(link);
+    } else {
+      const span = document.createElement('span');
+      span.className = 'soon';
+      span.textContent = 'Video próximamente';
+      modalAction.appendChild(span);
+    }
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeModal();
+    if(overlay.classList.contains('open')){
+      if(e.key === 'ArrowLeft') prevImage();
+      if(e.key === 'ArrowRight') nextImage();
+    }
+  });
+</script>
 
 </body>
 </html>
