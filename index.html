@@ -276,9 +276,10 @@
     padding: 18px 20px 20px;
   }
   .card-body h3{
-    font-size: 1.05rem;
-    margin-bottom: 8px;
-  }
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
   .meta{
     display:flex;
     gap: 10px;
@@ -464,6 +465,28 @@
   }
   .modal-video-link:hover{ border-color: var(--accent-soft); color: var(--accent-soft); }
   .modal-video-link svg{ width:16px; height:16px; fill:currentColor; flex-shrink:0; }
+
+  .modal-document-link{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 22px;
+    border:1px solid var(--line-strong);
+    color:var(--text);
+    font-size:0.9rem;
+    transition:border-color .2s ease, color .2s ease;
+    margin-left:10px;
+  }
+  .modal-document-link:hover{
+    border-color:var(--accent-soft);
+    color:var(--accent-soft);
+  }
+  .modal-document-link svg{
+    width:16px;
+    height:16px;
+    fill:currentColor;
+    flex-shrink:0;
+  }
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 860px){
@@ -685,8 +708,9 @@
         "Images/Escenario_Japon/Escenario_Japon_Captura_1.png",
         "Images/Escenario_Japon/Escenario_Japon_Captura_2.png"
       ],
-      description: "Ambientación e integración de elementos en un escenario 3D de inspiración feudal japonesa desarrollado en Unity. A partir de un terreno creado por un compañero, trabajé en la incorporación y distribución de la pagoda pagoda, iluminación y elementos de ambientación.",
-      youtube: "https://youtu.be/hNnAYwPOCaw"
+      description: "Ambientación e integración de elementos en un escenario 3D de inspiración feudal japonesa desarrollado en Unity. A partir de un terreno creado por un compañero, trabajé en la incorporación y distribución de la pagoda, iluminación y elementos de ambientación.",
+      youtube: "https://youtu.be/hNnAYwPOCaw",
+      document: "Documentos/Escenario_Japones/Informe_Tecnico.pdf"
     },
     {
       title: "Escena Left 4 Dead 2",
@@ -823,11 +847,15 @@
       link.className = 'modal-video-link';
       link.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ver en YouTube';
       modalAction.appendChild(link);
-    } else {
-      const span = document.createElement('span');
-      span.className = 'soon';
-      span.textContent = 'Video próximamente';
-      modalAction.appendChild(span);
+    }
+
+    if(p.document){
+      const documentLink = document.createElement('a');
+      documentLink.href = p.document;
+      documentLink.download = '';
+      documentLink.className = 'modal-document-link';
+      documentLink.innerHTML = '<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 19h14v2H5z"/></svg> Descargar informe técnico';
+      modalAction.appendChild(documentLink);
     }
 
     overlay.classList.add('open');
