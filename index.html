@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Javier Montero — Artista de Modelado 3D</title>
+<title>Javier Montero — Diseño de escenarios y ambientación 3D</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amarante&family=Story+Script&display=swap" rel="stylesheet">
 <style>
@@ -174,6 +174,15 @@
     font-size: 0.85rem;
   }
 
+  /* ---------- PROYECTO DESTACADO ---------- */
+  .card-featured{border-color:var(--accent-deep);position:relative}
+  .card-featured .thumb{aspect-ratio:16/9}
+  .card-featured .card-body{padding:25px 25px 28px}
+  .card-featured h3{font-size:clamp(1.45rem,2.7vw,2rem);margin:8px 0 10px}
+  .featured-kicker{display:inline-block;text-transform:uppercase;letter-spacing:.13em;color:var(--accent-soft);font-size:.7rem;font-weight:700}
+  .featured-desc{color:var(--text-muted);font-size:.89rem;max-width:55ch;margin:16px 0 0;line-height:1.6}
+  .project-highlight-link{display:inline-block;color:var(--accent-soft);font-size:.85rem;border-bottom:1px solid var(--line-strong);padding-bottom:4px}
+  .project-highlight-link:hover{border-color:var(--accent)}
   /* ---------- PROYECTOS ---------- */
   .project-grid{
     display:grid;
@@ -221,7 +230,7 @@
     border: 1px solid var(--line-strong);
     padding: 6px 12px;
   }
-  .card:nth-child(1){ grid-column: span 4; }
+  .card:nth-child(1){ grid-column: span 6; }
   .card:nth-child(2){ grid-column: span 2; }
   .card:nth-child(3){ grid-column: span 2; }
   .card:nth-child(4){ grid-column: span 4; }
@@ -519,9 +528,9 @@
 
   <section class="hero wrap">
     <div>
-      <div class="kicker">Modelado 3D · Diseño de escena</div>
+      <div class="kicker">Diseño de escenarios · Ambientación 3D · Videojuegos</div>
       <h1>Javier Montero</h1>
-      <p class="lede">Diseño y modelo escenas en Blender — desde dioramas y escenografías hasta esculturas de personajes — cuidando la composición, los materiales y la luz en cada pieza.</p>
+      <p class="lede">Diseño y construyo escenarios para videojuegos, cuidando la composición, la ambientación y la iluminación. Trabajo con Unity, Unreal Engine y Blender para convertir ideas visuales en espacios coherentes y explorables.</p>
       <div class="cta-row">
         <a class="btn" href="#proyectos">Ver proyectos</a>
         <a class="btn ghost" href="#contacto">Escríbeme</a>
@@ -533,11 +542,11 @@
     <div class="wrap about-grid">
       <div>
         <h2 style="font-size:1.9rem; margin-bottom:22px;">Sobre mí</h2>
-        <p>Estoy terminando mi carrera y me especializo en construir escenas y objetos en <strong>Blender</strong>, desde dioramas hasta recreaciones de videojuegos y esculturas de personajes.</p>
-        <p>Me interesa sobre todo el proceso de llevar una idea simple a una escena que se sienta completa: la composición, el detalle escultórico y cómo la luz cambia por completo el resultado final. Disfruto moverme entre estilos distintos — de lo más estilizado a recreaciones más realistas — y uso cada proyecto personal para profundizar en una parte distinta del proceso.</p>
+        <p>Soy estudiante de último año de desarrollo de videojuegos y me enfoco en el <strong>diseño de escenarios y la ambientación 3D</strong>. He trabajado en la construcción e integración de entornos para Unity y Unreal Engine, además de proyectos de escenografía y cinemáticas.</p>
+        <p>Me interesa cómo la distribución de los elementos, los recorridos, el encuadre y la luz influyen en la experiencia del jugador. Disfruto transformar referencias e ideas en espacios funcionales y expresivos, desde entornos estilizados hasta escenas más realistas. También exploro herramientas técnicas para ampliar las posibilidades de creación de escenarios.</p>
         <div class="stat-row">
           <div class="stat"><b>5</b><span>proyectos en el portafolio</span></div>
-          <div class="stat"><b>Blender</b><span>herramienta principal</span></div>
+          <div class="stat"><b>Unity · Unreal · Blender</b><span>herramientas de trabajo</span></div>
           <div class="stat"><b>Último año</b><span>de la carrera</span></div>
         </div>
       </div>
@@ -548,10 +557,23 @@
     <div class="wrap">
       <div class="section-head">
         <h2>Proyectos</h2>
+        <a class="project-highlight-link" href="nino-mundial-z.html">Explorar Niño Mundial Z — Caso de estudio ↗</a>
       </div>
       <div class="project-grid">
 
-        <button type="button" class="card t1" onclick="openModal(0)" aria-label="Ver detalle del proyecto Diorama Habitación">
+
+        <button type="button" class="card t5 card-featured" onclick="openModal(0)" aria-label="Ver Niño Mundial Z, cinemática en Unreal Engine">
+            <div class="thumb" style="background-image:url('Images/Escena_Zombie/Referencia_1.png'); background-size:cover; background-position:center;">
+                <div class="view-btn">Ver proyecto</div>
+            </div>
+            <div class="card-body"><span class="featured-kicker">Proyecto destacado · Caso de estudio</span>
+                <h3>Niño Mundial Z</h3>
+                <div class="meta"><span>Unreal Engine</span><span class="div"></span><span>Cinemática narrativa</span></div><p class="featured-desc">Storyboard, animación, cámaras e iluminación, desde la idea hasta la cinemática final.</p>
+            </div>
+        </button>
+
+
+        <button type="button" class="card t1" onclick="openModal(1)" aria-label="Ver detalle del proyecto Diorama Habitación">
           <div class="thumb" style="background-image:url('Images/Diorama_Habitacion/Diorama_Habitacion_Render.png'); background-size:cover; background-position:center;">
             <div class="view-btn">Ver proyecto</div>
           </div>
@@ -561,7 +583,7 @@
           </div>
         </button>
 
-        <button type="button" class="card t2" onclick="openModal(1)" aria-label="Ver detalle del proyecto Escenario 3D con inspiración japonesa">
+        <button type="button" class="card t2" onclick="openModal(2)" aria-label="Ver detalle del proyecto Escenario 3D con inspiración japonesa">
           <div class="thumb" style="background-image:url('Images/Escenario_Japon/Escenario_Japon_Miniatura.png'); background-size:cover; background-position:center;">
             <div class="view-btn">Ver proyecto</div>
           </div>
@@ -571,7 +593,7 @@
           </div>
         </button>
 
-        <button type="button" class="card t3" onclick="openModal(2)" aria-label="Ver detalle del proyecto Escena Left 4 Dead 2">
+        <button type="button" class="card t3" onclick="openModal(3)" aria-label="Ver detalle del proyecto Escena Left 4 Dead 2">
           <div class="thumb" style="background-image:url('Images/Escenario_Left/Referencia_Left_2.png'); background-size:cover; background-position:center;">
             <div class="view-btn">Ver proyecto</div>
           </div>
@@ -581,7 +603,7 @@
           </div>
         </button>
 
-        <button type="button" class="card t4" onclick="openModal(3)" aria-label="Ver detalle del proyecto Estatua Gato">
+        <button type="button" class="card t4" onclick="openModal(4)" aria-label="Ver detalle del proyecto Estatua Gato">
           <div class="thumb" style="background-image:url('Images/Gato/Gato_Render.png'); background-size:cover; background-position:center;">
             <div class="view-btn">Ver proyecto</div>
           </div>
@@ -589,16 +611,6 @@
             <h3>Estatua Gato</h3>
             <div class="meta"><span>Blender</span><span class="div"></span><span>Escultura digital</span><span class="div"></span><span>Fotogrametría</span></div>
           </div>
-        </button>
-
-        <button type="button" class="card t5" onclick="openModal(4)" aria-label="Ver detalle del proyecto Escena zombie">
-            <div class="thumb" style="background-image:url('Images/Escena_Zombie/Referencia_1.png'); background-size:cover; background-position:center;">
-                <div class="view-btn">Ver proyecto</div>
-            </div>
-            <div class="card-body">
-                <h3>Escena zombie</h3>
-                <div class="meta"><span>Unreal Engine</span><span class="div"></span><span>Cinemática</span></div>
-            </div>
         </button>
 
       </div>
@@ -612,15 +624,15 @@
       </div>
       <div class="skill-cols">
         <div class="skill-group">
-          <h3>Modelado y diseño de escena</h3>
+          <h3>Diseño de escenarios y ambientación</h3>
           <div class="tags">
             <span class="tag">Blender</span>
-            <span class="tag">Modelado poligonal</span>
-            <span class="tag">Escultura digital</span>
+            <span class="tag">Diseño de entornos</span>
+            <span class="tag">Ambientación 3D</span>
             <span class="tag">Composición de escena</span>
             <span class="tag">Encuadre y cámaras</span>
             <span class="tag">Unity</span>
-            <span class="tag">Unreal</span>
+            <span class="tag">Unreal Engine</span>
           </div>
         </div>
         <div class="skill-group">
@@ -665,7 +677,7 @@
 </main>
 
 <footer class="wrap">
-  <span>Javier Montero — Modelado y render 3D</span>
+  <span>Javier Montero — Diseño de escenarios y ambientación 3D</span>
   <span>Santiago, Chile</span>
 </footer>
 
@@ -690,6 +702,19 @@
 
 <script>
   const projects = [
+    {
+      title: "Niño Mundial Z",
+      tags: ["Unreal Engine", "Cinemática", "Proyecto grupal"],
+      images: [
+        "Images/Escena_Zombie/Referencia_1.png",
+        "Images/Escena_Zombie/Referencia_2.png",
+        "Images/Escena_Zombie/Referencia_3.png"
+      ],
+      description: "Cinemática grupal de suspenso realizada en Unreal Engine. Mi participación incluyó los storyboards, la integración de animaciones Mixamo, la animación facial manual, el montaje del escenario, las cámaras finales, la iluminación y la exportación. El proyecto evolucionó a partir de dos versiones del storyboard y añadió un primer plano del zombie para reforzar la tensión.",
+      youtube: "https://youtu.be/ylT5yHrQJKw",
+      caseStudy: "nino-mundial-z.html",
+      pdfDocument: "Documentos/Escena_Zombie/Nino_Mundial_Z_Documentacion.pdf"
+    },
     {
       title: "Diorama Habitación",
       tags: ["Blender", "Diorama"],
@@ -734,17 +759,6 @@
       ],
       description: "Escultura digital realizada a partir de un modelo obtenido mediante fotogrametría. Se realizó un proceso de limpieza y retopología para eliminar geometría innecesaria, optimizar el modelo y adaptarlo a distintos entornos digitales.",
       youtube: "https://youtu.be/XqcSdGm-0g8"
-    },
-    {
-      title: "Escena zombie",
-      tags: ["Unreal Engine", "Cinemática"],
-      images: [
-        "Images/Escena_Zombie/Referencia_1.png",
-        "Images/Escena_Zombie/Referencia_2.png",
-        "Images/Escena_Zombie/Referencia_3.png"
-      ],
-      description: "Cinemática realizada en Unreal Engine mediante Sequencer. El proyecto contempla la creación y montaje de una secuencia narrativa utilizando MetaHumans y assets externos, trabajando con cámaras, encuadres, animaciones, iluminación, sonido y ambientación. El objetivo fue construir una escena de persecución y enfrentamiento con una narrativa visual coherente.",
-      youtube: "https://youtu.be/ylT5yHrQJKw"
     }
   ];
 
@@ -846,6 +860,24 @@
       link.className = 'modal-video-link';
       link.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ver en YouTube';
       modalAction.appendChild(link);
+    }
+
+    if(p.caseStudy){
+      const studyLink = document.createElement('a');
+      studyLink.href = p.caseStudy;
+      studyLink.className = 'modal-document-link';
+      studyLink.textContent = 'Leer caso de estudio ↗';
+      modalAction.appendChild(studyLink);
+    }
+
+    if(p.pdfDocument){
+      const pdfLink = document.createElement('a');
+      pdfLink.href = p.pdfDocument;
+      pdfLink.target = '_blank';
+      pdfLink.rel = 'noopener noreferrer';
+      pdfLink.className = 'modal-document-link';
+      pdfLink.textContent = 'Ver PDF de documentación ↗';
+      modalAction.appendChild(pdfLink);
     }
 
     if(p.document){
