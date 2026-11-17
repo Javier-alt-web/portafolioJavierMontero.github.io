@@ -712,7 +712,8 @@
       ],
       description: "Cinemática grupal de suspenso realizada en Unreal Engine. Mi participación incluyó los storyboards, la integración de animaciones Mixamo, la animación facial manual, el montaje del escenario, las cámaras finales, la iluminación y la exportación. El proyecto evolucionó a partir de dos versiones del storyboard y añadió un primer plano del zombie para reforzar la tensión.",
       youtube: "https://youtu.be/ylT5yHrQJKw",
-      caseStudy: "nino-mundial-z.html"
+      caseStudy: "nino-mundial-z.html",
+      pdfDocument: "Documentos/Nino_Mundial_Z_Documentacion_Final.pdf"
     },
     {
       title: "Diorama Habitación",
@@ -867,6 +868,16 @@
       studyLink.className = 'modal-document-link';
       studyLink.textContent = 'Leer caso de estudio ↗';
       modalAction.appendChild(studyLink);
+    }
+
+    if(p.pdfDocument){
+      const pdfLink = document.createElement('a');
+      pdfLink.href = p.pdfDocument;
+      pdfLink.target = '_blank';
+      pdfLink.rel = 'noopener noreferrer';
+      pdfLink.className = 'modal-document-link';
+      pdfLink.textContent = 'Ver PDF de documentación ↗';
+      modalAction.appendChild(pdfLink);
     }
 
     if(p.document){
